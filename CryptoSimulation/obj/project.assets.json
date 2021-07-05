@@ -7526,11 +7526,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\CryptoSimulation\\CryptoSimulation\\CryptoSimulation.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\CryptoSimulation\\CryptoSimulation\\CryptoSimulation.csproj",
       "projectName": "CryptoSimulation",
-      "projectPath": "C:\\Users\\User\\source\\repos\\CryptoSimulation\\CryptoSimulation\\CryptoSimulation.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\CryptoSimulation\\CryptoSimulation\\CryptoSimulation.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\CryptoSimulation\\CryptoSimulation\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\CryptoSimulation\\CryptoSimulation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
