@@ -57,28 +57,10 @@
                                 {
                                     if (provider.Name == "Google")
                                     {
-                                        <div id="my-signin2"></div>
-                                        <script>
-                                            function onSuccess(googleUser) {
-                                                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-                                            }
-                                            function onFailure(error) {
-                                                console.log(error);
-                                            }
-                                            function renderButton() {
-                                                gapi.signin2.render('my-signin2', {
-                                                    'scope': 'profile email',
-                                                    'width': 240,
-                                                    'height': 50,
-                                                    'longtitle': true,
-                                                    'theme': 'dark',
-                                                    'onsuccess': onSuccess,
-                                                    'onfailure': onFailure
-                                                });
-                                            }
-                                        </script>
-
-                                        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                                            Sign in using @provider.DisplayName
+                                        </button>
                                     }
                                     else
                                     {
@@ -96,29 +78,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <meta name="google-signin-client-id" content="875610767166-bsr3f8ekcuj53ff05f65i0k9d6b19kl4.apps.googleusercontent.com" />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" async defer></script>
-    <script>
-        function onSuccess(googleUser) {
-            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        }
-        function onFailure(error) {
-            console.log(error);
-        }
-        function renderButton() {
-            gapi.signin2.render('my-signin2', {
-                'scope': 'profile email',
-                'width': 240,
-                'height': 50,
-                'longtitle': true,
-                'theme': 'dark',
-                'onsuccess': onSuccess,
-                'onfailure': onFailure
-            });
-        }
-    </script>
-
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
 }

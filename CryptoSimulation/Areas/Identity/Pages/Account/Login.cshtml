@@ -6,6 +6,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+<head>
+    <meta name="google-signin-client_id" content="875610767166-bsr3f8ekcuj53ff05f65i0k9d6b19kl4.apps.googleusercontent.com">
+</head>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" href="~/css/Socials.css">
 <div class="row">
     <div class="col-md-4">
         <section>
@@ -71,17 +76,14 @@
                                 {
                                     if (provider.Name == "Google")
                                     {
-                                        <div class="col-md-4">
-                                            <button type="submit" class="btn btn-block btn-google" value="@provider.Name"
-                                                    title="Log in using your @provider.DisplayName account" name="provider">
-
-                                                <i class="fab fa-google-plus fa-align-left social-icon" style=""></i>Google
-                                            </button>
-                                        </div>
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                                            Sign in using @provider.DisplayName
+                                        </button>
                                     }
                                     else
                                     {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                     }
                                 }
                             </p>
