@@ -5,7 +5,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<head>
+    <meta name="google-signin-client_id" content="875610767166-bsr3f8ekcuj53ff05f65i0k9d6b19kl4.apps.googleusercontent.com">
+</head>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" href="~/css/Socials.css">
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -51,7 +55,35 @@
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    if (provider.Name == "Google")
+                                    {
+                                        <div id="my-signin2"></div>
+                                        <script>
+                                            function onSuccess(googleUser) {
+                                                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                                            }
+                                            function onFailure(error) {
+                                                console.log(error);
+                                            }
+                                            function renderButton() {
+                                                gapi.signin2.render('my-signin2', {
+                                                    'scope': 'profile email',
+                                                    'width': 240,
+                                                    'height': 50,
+                                                    'longtitle': true,
+                                                    'theme': 'dark',
+                                                    'onsuccess': onSuccess,
+                                                    'onfailure': onFailure
+                                                });
+                                            }
+                                        </script>
+
+                                        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
                                 }
                             </p>
                         </div>
@@ -64,4 +96,29 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <meta name="google-signin-client-id" content="875610767166-bsr3f8ekcuj53ff05f65i0k9d6b19kl4.apps.googleusercontent.com" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" async defer></script>
+    <script>
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        }
+        function onFailure(error) {
+            console.log(error);
+        }
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 }
