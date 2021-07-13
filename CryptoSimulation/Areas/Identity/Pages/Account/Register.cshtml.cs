@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using CryptoSimulation.Models;
+using CryptoSimulation.Controllers;
+using CryptoSimulation.Data;
 
 namespace CryptoSimulation.Areas.Identity.Pages.Account
 {
@@ -24,6 +26,7 @@ namespace CryptoSimulation.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -75,7 +78,9 @@ namespace CryptoSimulation.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                 
+                
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Wallet = new Wallet(), Portfolio = new Portfolio() };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

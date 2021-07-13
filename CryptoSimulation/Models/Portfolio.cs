@@ -8,6 +8,7 @@ namespace CryptoSimulation.Models
 {
     public class Portfolio
     {       
+        [Display(Name = "ID")]
         public int PortfolioID { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }

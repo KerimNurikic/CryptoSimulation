@@ -351,3 +351,4 @@ C:\Users\User\Documents\CryptoSimulation\CryptoSimulation\obj\Debug\net5.0\Razor
 C:\Users\User\Documents\CryptoSimulation\CryptoSimulation\obj\Debug\net5.0\Razor\Views\WalletPart\Details.cshtml.g.cs
 C:\Users\User\Documents\CryptoSimulation\CryptoSimulation\obj\Debug\net5.0\Razor\Views\WalletPart\Edit.cshtml.g.cs
 C:\Users\User\Documents\CryptoSimulation\CryptoSimulation\obj\Debug\net5.0\Razor\Views\WalletPart\Index.cshtml.g.cs
+C:\Users\User\Documents\CryptoSimulation\CryptoSimulation\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ExternalLogin.cshtml.g.cs
