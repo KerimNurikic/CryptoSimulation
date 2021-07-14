@@ -61,7 +61,7 @@ namespace CryptoSimulation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransactionID,WalletIDSender,WalletIDReciever,PortfolioID,Currency,Value,TransactionDate")] Transaction transaction)
+        public async Task<IActionResult> Create([Bind("TransactionID,WalletIDSender,WalletIDReciever,PortfolioID,Type,Currency,Value,TransactionDate")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {

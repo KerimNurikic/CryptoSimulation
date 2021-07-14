@@ -1,4 +1,5 @@
-﻿@model CryptoSimulation.Models.Transaction
+﻿
+@model CryptoSimulation.Models.Transaction
 
 @{
     ViewData["Title"] = "Create";
@@ -14,15 +15,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="WalletIDSender" class="control-label"></label>
-                <select asp-for="WalletIDSender" class ="form-control" asp-items="ViewBag.WalletIDSender"></select>
+                <select asp-for="WalletIDSender" class="form-control" asp-items="ViewBag.WalletIDSender"></select>
             </div>
             <div class="form-group">
                 <label asp-for="WalletIDReciever" class="control-label"></label>
-                <select asp-for="WalletIDReciever" class ="form-control" asp-items="ViewBag.WalletIDReciever"></select>
+                <select asp-for="WalletIDReciever" class="form-control" asp-items="ViewBag.WalletIDReciever"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PortfolioID" class="control-label"></label>
-                <select asp-for="PortfolioID" class ="form-control" asp-items="ViewBag.PortfolioID"></select>
+                <select asp-for="PortfolioID" class="form-control" asp-items="ViewBag.PortfolioID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<TransactionType>()"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Currency" class="control-label"></label>

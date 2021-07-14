@@ -16,7 +16,8 @@ namespace CryptoSimulation.Models
         public int? WalletIDSender { get; set; }
         [ForeignKey("WalletReciever")]
         public int WalletIDReciever { get; set; }
-
+        [Required]
+        public TransactionType Type { get; set; }
         public int PortfolioID { get; set; }
         [Required]
         public string Currency { get; set; }
