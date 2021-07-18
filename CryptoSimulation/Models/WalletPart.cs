@@ -17,7 +17,7 @@ namespace CryptoSimulation.Models
         [Required]
         public string Currency { get; set; }
         [Required]
-        public string Amount { get; set; }
+        public double Amount { get; set; }
 
         public virtual Wallet Wallet { get; set; }
     }

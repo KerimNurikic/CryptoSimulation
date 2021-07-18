@@ -78,9 +78,13 @@ namespace CryptoSimulation.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                 
-                
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Wallet = new Wallet(), Portfolio = new Portfolio() };
+
+                Wallet w = new Wallet();
+                w.WalletParts = new List<WalletPart>();
+                foreach (Coins coin in (Coins[])Enum.GetValues(typeof(Coins)))
+                    w.WalletParts.Add(new WalletPart { Amount = 0, Currency = coin.ToString() });
+
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, Wallet = w, Portfolio = new Portfolio() };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
