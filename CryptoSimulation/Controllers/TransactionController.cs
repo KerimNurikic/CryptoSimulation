@@ -22,7 +22,7 @@ namespace CryptoSimulation.Controllers
         // GET: Transaction
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Transaction.Include(t => t.Portfolio).Include(t => t.WalletReciever).Include(t => t.WalletSender);
+            var applicationDbContext = _context.Transaction; //.Include(t => t.Portfolio).Include(t => t.WalletReciever).Include(t => t.WalletSender);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -68,16 +68,19 @@ namespace CryptoSimulation.Controllers
                 switch (transaction.Type)
                 {
                     case TransactionType.Buy:
-                        BuyCoins(transaction.WalletIDReciever, transaction.Value, transaction.Currency);
+                        if(BuyCoins(transaction.WalletIDReciever, transaction.Value, transaction.Currency))
+                            _context.Add(transaction);
                         break;
                     case TransactionType.Sell:
+                        if (SellCoins(transaction.WalletIDReciever, transaction.Value, transaction.Currency))
+                            _context.Add(transaction);
                         break;
                     case TransactionType.Transfer:
                         break;
                     default:
                         break;
                 }
-                _context.Add(transaction);
+                //_context.Add(transaction);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -88,14 +91,30 @@ namespace CryptoSimulation.Controllers
         }
 
         [HttpPost]
-        public void BuyCoins(int walletID, double amount, string currency )
+        public bool BuyCoins(int walletID, double amount, string currency)
         {
             WalletPart wp = _context.WalletPart.Where(i => i.WalletID == walletID && i.Currency == currency).First();
             wp.Amount = wp.Amount + amount;
             _context.Entry(wp).Property("Amount").IsModified = true;
             _context.SaveChanges();
-            
+            return true;
         }
+
+        [HttpPost]
+        public bool SellCoins(int walletID, double amount, string currency)
+        {
+            WalletPart wp = _context.WalletPart.Where(i => i.WalletID == walletID && i.Currency == currency).First();
+            if (wp.Amount - amount >= 0)
+            {
+                wp.Amount -= amount;
+                _context.Entry(wp).Property("Amount").IsModified = true;
+                _context.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
+
 
         // GET: Transaction/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -116,7 +135,7 @@ namespace CryptoSimulation.Controllers
             return View(transaction);
         }
 
-        
+
         // POST: Transaction/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

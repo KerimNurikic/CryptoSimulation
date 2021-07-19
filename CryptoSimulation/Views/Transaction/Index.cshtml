@@ -3,15 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1>Transaction History</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<table class="table" id="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Currency)
             </th>
@@ -22,44 +20,99 @@
                 @Html.DisplayNameFor(model => model.TransactionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Portfolio)
+                Type
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WalletSender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WalletReciever)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransactionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Portfolio.PortfolioID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WalletSender.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WalletReciever.ID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TransactionID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Reverse())
+        {
+            <tr>
+                <td>
+                    @{switch (item.Currency)
+                        {
+                            case "BTC":
+                                <img src="~/src/btc_icon.png" />;
+                                break;
+
+                            case "ETH":
+                                <img src="~/src/eth_icon.png" />;
+                                break;
+
+                            case "USDT":
+                                <img src="~/src/usdt_icon.png" />;
+                                break;
+
+                            case "ADA":
+                                <img src="~/src/ada_icon.png" />;
+                                break;
+
+                            case "LTC":
+                                <img src="~/src/ltc_icon.png" />;
+                                break;
+
+                            case "XLM":
+                                <img src="~/src/xlm_icon.png" />;
+                                break;
+
+                            case "BCH":
+                                <img src="~/src/bch_icon.png" />;
+                                break;
+
+                            case "BNB":
+                                <img src="~/src/bnb_icon.png" />;
+                                break;
+
+                            case "XRP":
+                                <img src="~/src/xrp_icon.png" />;
+                                break;
+
+                            case "DOGE":
+                                <img src="~/src/doge_icon.png" />;
+                                break;
+
+                            default:
+                                break;
+                        } }
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.TransactionDate)
+                </td>
+                <td style="vertical-align: middle;">@Transaction.TransactionDisplay(item.WalletIDReciever, item.Type)</td>
+
+                <td style="vertical-align: middle;">
+
+                    <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script>
+
+    var as = document.getElementById("table");
+    for (var i = 1; i < as.rows.length; i++) {
+        var trs = as.getElementsByTagName("tr")[i];
+        var cellVal = trs.cells[4]
+        if (cellVal.innerHTML.toString() == "Bought") {
+            trs.style.backgroundColor = "rgb(22, 184, 46, 0.6)";
+        } else {
+            trs.style.backgroundColor = "rgb(217, 46, 46, 0.6)";
+        }
+       
+        
+    }
+
+    
+    
+</script>

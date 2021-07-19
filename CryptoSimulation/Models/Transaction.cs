@@ -30,5 +30,22 @@ namespace CryptoSimulation.Models
         public virtual Portfolio Portfolio { get; set; }
         public virtual Wallet? WalletSender { get; set; }
         public virtual Wallet WalletReciever { get; set; }
+        public static string TransactionDisplay(int recieverID, TransactionType type)
+        {
+            switch (type)
+            {
+                case TransactionType.Buy:
+                    return "Bought";
+                case TransactionType.Sell:
+                    return "Sold";
+                case TransactionType.Transfer:
+                    return "Transfered to" + recieverID;
+                default:
+                    return "Error";
+            }
+        }
+
     }
+
+    
 }
