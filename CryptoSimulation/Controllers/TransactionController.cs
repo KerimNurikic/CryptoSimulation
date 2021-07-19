@@ -68,11 +68,9 @@ namespace CryptoSimulation.Controllers
                 switch (transaction.Type)
                 {
                     case TransactionType.Buy:
-                        BuyCoins(transaction.WalletIDReciever, transaction.Value);
+                        BuyCoins(transaction.WalletIDReciever, transaction.Value, transaction.Currency);
                         break;
                     case TransactionType.Sell:
-                        break;
-                    case TransactionType.Recieve:
                         break;
                     case TransactionType.Transfer:
                         break;
@@ -90,9 +88,13 @@ namespace CryptoSimulation.Controllers
         }
 
         [HttpPost]
-        public void BuyCoins(int walletID, double amount)
+        public void BuyCoins(int walletID, double amount, string currency )
         {
-           
+            WalletPart wp = _context.WalletPart.Where(i => i.WalletID == walletID && i.Currency == currency).First();
+            wp.Amount = wp.Amount + amount;
+            _context.Entry(wp).Property("Amount").IsModified = true;
+            _context.SaveChanges();
+            
         }
 
         // GET: Transaction/Edit/5

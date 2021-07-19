@@ -15,7 +15,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="WalletIDSender" class="control-label"></label>
-                <select asp-for="WalletIDSender" class="form-control" asp-items="ViewBag.WalletIDSender"></select>
+                <select asp-for="WalletIDSender" class="form-control" asp-items="ViewBag.WalletIDSender">
+                    <option disabled selected>--- SELECT ---</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="WalletIDReciever" class="control-label"></label>

@@ -9,7 +9,6 @@ namespace CryptoSimulation.Models
     {
         Buy,
         Sell,
-        Transfer,
-        Recieve
+        Transfer
     }
 }
