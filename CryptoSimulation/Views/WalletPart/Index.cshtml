@@ -4,14 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Wallet</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Currency)
             </th>
@@ -19,29 +18,76 @@
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Wallet)
+
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wallet.ID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WalletPartID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WalletPartID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WalletPartID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            var name = CoinMethods.getDisplayName(item.Currency);
+            //var src = CoinMethods.getImg(item.Currency);
+
+
+            <tr>
+                <td>
+                    @{switch (item.Currency)
+                        {
+                            case "BTC":
+                                <img src="~/src/btc_icon.png" />;
+                                break;
+
+                            case "ETH":
+                                <img src="~/src/eth_icon.png" />;
+                                break;
+
+                            case "USDT":
+                                <img src="~/src/usdt_icon.png" />;
+                                break;
+
+                            case "ADA":
+                                <img src="~/src/ada_icon.png" />;
+                                break;
+
+                            case "LTC":
+                                <img src="~/src/ltc_icon.png" />;
+                                break;
+
+                            case "XLM":
+                                <img src="~/src/xlm_icon.png" />;
+                                break;
+
+                            case "BCH":
+                                <img src="~/src/bch_icon.png" />;
+                                break;
+
+                            case "BNB":
+                                <img src="~/src/bnb_icon.png" />;
+                                break;
+
+                            case "XRP":
+                                <img src="~/src/xrp_icon.png" />;
+                                break;
+
+                            case "DOGE":
+                                <img src="~/src/doge_icon.png" />;
+                                break;
+
+                            default:
+                                break;
+                        } }
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => name)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Amount)$
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.WalletPartID">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

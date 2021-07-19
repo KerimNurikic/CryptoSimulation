@@ -65,6 +65,20 @@ namespace CryptoSimulation.Controllers
         {
             if (ModelState.IsValid)
             {
+                switch (transaction.Type)
+                {
+                    case TransactionType.Buy:
+                        BuyCoins(transaction.WalletIDReciever, transaction.Value);
+                        break;
+                    case TransactionType.Sell:
+                        break;
+                    case TransactionType.Recieve:
+                        break;
+                    case TransactionType.Transfer:
+                        break;
+                    default:
+                        break;
+                }
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -73,6 +87,12 @@ namespace CryptoSimulation.Controllers
             ViewData["WalletIDReciever"] = new SelectList(_context.Wallet, "ID", "ID", transaction.WalletIDReciever);
             ViewData["WalletIDSender"] = new SelectList(_context.Wallet, "ID", "ID", transaction.WalletIDSender);
             return View(transaction);
+        }
+
+        [HttpPost]
+        public void BuyCoins(int walletID, double amount)
+        {
+           
         }
 
         // GET: Transaction/Edit/5
@@ -94,6 +114,7 @@ namespace CryptoSimulation.Controllers
             return View(transaction);
         }
 
+        
         // POST: Transaction/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

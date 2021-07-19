@@ -19,7 +19,7 @@ namespace CryptoSimulation.Models
         [Required]
         public TransactionType Type { get; set; }
         public int PortfolioID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Currency is required")]
         public string Currency { get; set; }
         public double Value { get; set; }
         [Required]

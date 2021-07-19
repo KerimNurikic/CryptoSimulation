@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CryptoSimulation.Data;
 using CryptoSimulation.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace CryptoSimulation.Controllers
 {
     public class WalletPartController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
-        public WalletPartController(ApplicationDbContext context)
+        public WalletPartController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: WalletPart
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.WalletPart.Include(w => w.Wallet);
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
+            
+            var applicationDbContext = _context.WalletPart.Include(w => w.Wallet).Where(i => i.WalletID == currentUser.WalletID);
             return View(await applicationDbContext.ToListAsync());
         }
 
